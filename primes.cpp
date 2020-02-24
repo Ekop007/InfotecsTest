@@ -177,6 +177,29 @@ uint32_t Primes::Iterator::operator*()
     return *value;
 }
 
+Primes::Iterator &Primes::Iterator::operator+=(uint32_t num)
+{
+    value += sizeof(value) * num;
+    return *this;
+}
+
+Primes::Iterator &Primes::Iterator::operator-=(uint32_t num)
+{
+    value += sizeof(value) * num;
+    return *this;
+}
+
+Primes::Iterator &Primes::Iterator::operator-(uint32_t num)
+{
+    value -= sizeof(value) * num;
+    return *this;
+}
+
+uint32_t Primes::Iterator::operator-(Primes::Iterator &it)
+{
+    return value - it.value;
+}
+
 Primes::Iterator &Primes::Iterator::operator=(Primes::Iterator &it)
 {
     this->value = it.value;

@@ -38,6 +38,8 @@ uint32_t readNumber(char *num)
 
 int main (int argc, char **argv)
 {
+    testing::InitGoogleTest(&argc, argv);
+    RUN_ALL_TESTS();
     Program p;
     uint32_t i;
     if (argc == 1)
