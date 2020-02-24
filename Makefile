@@ -10,4 +10,4 @@ clean:
 main.o: main.cpp primes.hpp
             g++ -c -o main.o main.cpp
 primes.o: primes.cpp primes.hpp
-            g++
+            g++ -c -o primes.o primes.cpp
