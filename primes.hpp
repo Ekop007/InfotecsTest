@@ -17,6 +17,7 @@ public:
 
         friend const Iterator& operator++(Primes::Iterator& it);
         friend const Iterator& operator--(Primes::Iterator& it);
+        Iterator& operator=(Primes::Iterator& it);
 
         friend class Primes;
 	private:
@@ -29,11 +30,14 @@ public:
 
 private:
 
-    void findPrimes(uint32_t max);
+    void reinitArray();
+    void findPrimes();
+    void continueFindPrimes(uint32_t index);
 
 	uint32_t *array;
-    uint32_t s;
-    bool endf;
+    uint32_t maxs;
+    uint32_t curs;
+    uint32_t upper_bound;
 };
 
 #endif // PRIMES_HPP

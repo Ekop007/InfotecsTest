@@ -1,7 +1,6 @@
 #include <iostream>
-#include "primes.hpp"
-
-
+#include <string.h>
+#include "program.hpp"
 
 void printHelp()
 {
@@ -19,20 +18,100 @@ void printHelp()
     std::cout << "-help - call the command list\n";
 }
 
-void printArray(Primes &p, uint32_t var, char *filename)
+uint32_t readNumber(char *num)
 {
-
+    uint32_t i(0);
+    while (*num !='0')
+    {
+        if (*num >= '0' && *num <= '9')
+        {
+            i = i * 10 + (*num - '0');
+            num += sizeof(char);
+        }
+        else
+        {
+            throw -3;
+        }
+    }
+    return i;
 }
 
 int main (int argc, char **argv)
 {
+    Program p;
+    uint32_t i;
     if (argc == 1)
     {
-        Primes p(100);
+        std::cout << "print -help for call the command list\n";
     }
     else
     {
+        try
+        {
 
+            for (i = 1; i < static_cast<uint32_t>(argc); ++i)
+            {
+                if (argv[i][0] == '-')
+                {
+                    if (strcmp(argv[i], "-search") == 0)
+                    {
+                        p.setSeachMode(readNumber(argv[i+1]));
+                        ++i;
+                    }
+                    else if (strcmp(argv[i], "-number") == 0)
+                    {
+                        p.setMax(readNumber(argv[i+1]));
+                        ++i;
+                    }
+                    else if (strcmp(argv[i], "-print") == 0)
+                    {
+                        if (argv[i+1][0] == '-')
+                        {
+                            p.setFilename(nullptr);
+                        }
+                        else
+                        {
+                            p.setFilename(argv[i+1]);
+                            ++i;
+                        }
+                    }
+                    else if (strcmp(argv[i], "-search") == 0)
+                    {
+                        p.setSeachMode(readNumber(argv[i+1]));
+                        ++i;
+                    }
+                    else
+                    {
+                        throw 0;
+                    }
+                }
+            }
+            p.run();
+        }
+
+        catch (int a)
+        {
+            switch (a)
+            {
+                case 0:
+                {
+                    std::cout << "Unknown parameter " << '"' << argv[i] << '"' << std::endl;
+                }
+                case -1:
+                {
+                    std::cout << "Indefind number of search mode!" << std::endl;
+                }
+                case -2:
+                {
+                    std::cout << "Attempt to access the end of an infifnite array!" << std::endl;
+                }
+                case -3:
+                {
+                    std::cout << "Unknown number" << argv[i] << std::endl;
+                }
+            }
+        }
     }
+
     return 0;
 }
