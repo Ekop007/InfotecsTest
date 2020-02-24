@@ -21,23 +21,26 @@ void Program::fileOutput(Primes &p)
             {
                 out << p[i] << std::endl;
             }
+            break;
         }
         case 1:
         {
-            for(uint32_t i = 0; p[i] < max; ++i)
+            for(uint32_t i = 0; i < max; ++i)
             {
-                out << p[p[i]] << std::endl;
+                out << p[p[i]-1] << std::endl;
             }
+            break;
         }
         case 2:
         {
-            for(uint32_t i = 0; p[i] < max; ++i)
+            for(uint32_t i = 0; i < max; ++i)
             {
                 if (SophieGemanFilter(p, i))
                 {
                     out << p[i] << std::endl;
                 }
             }
+            break;
         }
     }
     out.close();
@@ -57,23 +60,26 @@ void Program::consoleOutput(Primes &p)
             {
                 std::cout << p[i] << " ";
             }
+            break;
         }
         case 1:
         {
-            for(uint32_t i = 0; p[i] < max; ++i)
+            for(uint32_t i = 0; i < max; ++i)
             {
-                std::cout << p[p[i]] << std::endl;
+                std::cout << p[p[i]-1] << " ";
             }
+            break;
         }
         case 2:
         {
-            for(uint32_t i = 0; p[i] < max; ++i)
+            for(uint32_t i = 0; i < max; ++i)
             {
                 if (SophieGemanFilter(p, i))
                 {
-                    std::cout << p[i] << std::endl;
+                    std::cout << p[i] << " ";
                 }
             }
+            break;
         }
     }
     std::cout << "\n";
@@ -81,8 +87,8 @@ void Program::consoleOutput(Primes &p)
 
 bool Program::SophieGemanFilter(Primes &p, uint32_t i)
 {
-    auto num = 2 * p[i] + 1;
-    auto j = i;
+    uint32_t num = 2 * p[i] + 1;
+    uint32_t j = i;
     while (num > p[j])
     {
         ++j;
@@ -109,9 +115,9 @@ void Program::setFilename(char *name)
 {
     if (name != nullptr)
     {
-        print = true;
         filename = name;
     }
+    print = true;
 }
 
 void Program::run()

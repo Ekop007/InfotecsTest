@@ -1,6 +1,7 @@
 #include <cmath>
 #include <string.h>
 #include <fstream>
+#include <iostream>
 #include "primes.hpp"
 
 Primes::Primes() : maxs(adds), curs(0), upper_bound(0)
@@ -18,6 +19,7 @@ Primes::Primes(uint32_t max) : maxs(adds), curs(0), upper_bound(max)
 Primes::Iterator Primes::begin()
 {
         Primes::Iterator it;
+        it.value = array;
         return it;
 }
 
@@ -79,25 +81,28 @@ void Primes::findPrimes()
             {
                 continue;
             }
-            for (j = 0; array[j] > static_cast<uint32_t>(sqrt(i) + 1); ++j)
+            else
             {
-
-                if (i % array[j] == 0)
+                uint32_t k = static_cast<uint32_t>(sqrt(i) + 1);
+                for (j = 0; array[j] < k; ++j)
                 {
-                    break;
+                    if (i % array[j] == 0)
+                    {
+                        break;
+                    }
                 }
-            }
-            if (i % array[j] != 0)
-            {
-                array[curs] = i;
-                ++curs;
+                if (i % array[j] != 0)
+                {
+                    array[curs] = i;
+                    ++curs;
+                }
             }
         }
     }
     else
     {
         uint32_t j = 0;
-        for(uint32_t i = 2; curs < maxs; ++i)
+        for(uint32_t i = 2; curs <= maxs; ++i)
         {
             if (i == 2)
             {
@@ -109,18 +114,21 @@ void Primes::findPrimes()
             {
                 continue;
             }
-            for (j = 0; array[j] > static_cast<uint32_t>(sqrt(i) + 1); ++j)
+            else
             {
-
-                if (i % array[j] == 0)
+                uint32_t k = static_cast<uint32_t>(sqrt(i) + 1);
+                for (j = 0; array[j] < k; ++j)
                 {
-                    break;
+                    if (i % array[j] == 0)
+                    {
+                        break;
+                    }
                 }
-            }
-            if (i % array[j] != 0)
-            {
-                array[curs] = i;
-                ++curs;
+                if (i % array[j] != 0)
+                {
+                    array[curs] = i;
+                    ++curs;
+                }
             }
         }
     }
@@ -132,12 +140,8 @@ void Primes::continueFindPrimes(uint32_t index)
     {
         reinitArray();
         uint32_t j = 0;
-        for(uint32_t i = array[curs-1]; curs < maxs; ++i)
+        for(uint32_t i = array[curs-1] + 1; curs <= maxs; ++i)
         {
-            if (curs == maxs)
-            {
-                reinitArray();
-            }
             if (i == 2)
             {
                 array[curs] = i;
@@ -148,18 +152,21 @@ void Primes::continueFindPrimes(uint32_t index)
             {
                 continue;
             }
-            for (j = 0; array[j] > static_cast<uint32_t>(sqrt(i) + 1); ++j)
+            else
             {
-
-                if (i % array[j] == 0)
+                uint32_t k = static_cast<uint32_t>(sqrt(i) + 1);
+                for (j = 0; array[j] < k; ++j)
                 {
-                    break;
+                    if (i % array[j] == 0)
+                    {
+                        break;
+                    }
                 }
-            }
-            if (i % array[j] != 0)
-            {
-                array[curs] = i;
-                ++curs;
+                if (i % array[j] != 0)
+                {
+                    array[curs] = i;
+                    ++curs;
+                }
             }
         }
     }

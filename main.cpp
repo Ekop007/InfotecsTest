@@ -21,7 +21,7 @@ void printHelp()
 uint32_t readNumber(char *num)
 {
     uint32_t i(0);
-    while (*num !='0')
+    while (*num != '\0')
     {
         if (*num >= '0' && *num <= '9')
         {
@@ -55,30 +55,35 @@ int main (int argc, char **argv)
                 {
                     if (strcmp(argv[i], "-search") == 0)
                     {
-                        p.setSeachMode(readNumber(argv[i+1]));
                         ++i;
+                        p.setSeachMode(readNumber(argv[i]));
+
                     }
                     else if (strcmp(argv[i], "-number") == 0)
                     {
-                        p.setMax(readNumber(argv[i+1]));
                         ++i;
+                        p.setMax(readNumber(argv[i]));
                     }
                     else if (strcmp(argv[i], "-print") == 0)
                     {
-                        if (argv[i+1][0] == '-')
+                        if (i + 1 < static_cast<uint32_t>(argc) && argv[i+1][0] != '-')
                         {
-                            p.setFilename(nullptr);
+                            ++i;
+                            p.setFilename(argv[i]);
                         }
                         else
                         {
-                            p.setFilename(argv[i+1]);
-                            ++i;
+                            p.setFilename(nullptr);
                         }
                     }
-                    else if (strcmp(argv[i], "-search") == 0)
+                    else if (strcmp(argv[i], "-output") == 0)
                     {
-                        p.setSeachMode(readNumber(argv[i+1]));
                         ++i;
+                        p.setSelect(readNumber(argv[i]));
+                    }
+                    else if (strcmp(argv[i], "-help") == 0)
+                    {
+                        printHelp();
                     }
                     else
                     {
@@ -88,7 +93,6 @@ int main (int argc, char **argv)
             }
             p.run();
         }
-
         catch (int a)
         {
             switch (a)
@@ -96,18 +100,22 @@ int main (int argc, char **argv)
                 case 0:
                 {
                     std::cout << "Unknown parameter " << '"' << argv[i] << '"' << std::endl;
+                    break;
                 }
                 case -1:
                 {
                     std::cout << "Indefind number of search mode!" << std::endl;
+                    break;
                 }
                 case -2:
                 {
                     std::cout << "Attempt to access the end of an infifnite array!" << std::endl;
+                    break;
                 }
                 case -3:
                 {
                     std::cout << "Unknown number" << argv[i] << std::endl;
+                    break;
                 }
             }
         }

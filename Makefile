@@ -1,13 +1,11 @@
-.PHONY all clean
+.PHONY: all clean
 
 CC = g++
-CFLAGS = -g -Wall
+CFLAGS = -std=c++11 -Wall -Wextra -g
 
 all: primenumbers
 
 clean:
-            rm -rf primenumbers *.o
-main.o: main.cpp primes.hpp
-            g++ -c -o main.o main.cpp
-primes.o: primes.cpp primes.hpp
-            g++ -c -o primes.o primes.cpp
+		rm -rf primenumbers *.o
+primenumbers: main.cpp program.cpp primes.cpp
+		$(CC) $(CFLAGS) main.cpp program.cpp primes.cpp -o primenumbers
