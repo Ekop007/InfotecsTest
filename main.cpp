@@ -5,7 +5,7 @@
 void printHelp()
 {
     std::cout << "Hello. This program is desiged to count prime numbers.\n";
-    std::cout << "Instruction:\n";
+    std::cout << "Parameters:\n";
     std::cout << "-search <mode> - prime search mode. There are 2 modes:\n";
     std::cout << "        0 - range search with upper bound - default\n";
     std::cout << "        1 - search of a certain amount\n";
