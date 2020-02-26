@@ -10,7 +10,6 @@ public:
     Program();
     void fileOutput(Primes &p);
     void consoleOutput(Primes &p);
-    bool SophieGemanFilter(Primes &p, uint32_t i);
     void setSeachMode(uint32_t mode);
     void setMax(uint32_t number);
     void setSelect(uint32_t mode);

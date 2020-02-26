@@ -1,7 +1,6 @@
 #ifndef PRIMES_HPP
 #define PRIMES_HPP
 
-#include <gtest/gtest.h>
 #include <cstdint>
 
 static const uint32_t adds = 20;
@@ -44,41 +43,5 @@ private:
     uint32_t curs;
     uint32_t upper_bound;
 };
-
-class TestPrimes : public ::testing::Test
-{
-protected:
-    Primes *primes;
-};
-
-TEST_F(TestPrimes, testEnd)
-{
-    primes = new Primes();
-    auto t = primes->end();
-    ASSERT_EQ(nullptr, t);
-}
-
-TEST_F(TestPrimes, upperBoundTest)
-{
-    primes = new Primes(5);
-    auto t = primes->end();
-    --t;
-    ASSERT_EQ(11, *t);
-}
-
-TEST_F(TestPrimes, infinityArrayTest)
-{
-    primes = new Primes();
-    auto t = primes[79];
-    ASSERT_EQ(409, t);
-}
-
-TEST_F(TestPrimes, sizeTest)
-{
-    primes = new Primes(50);
-    auto t = primes->size();
-    ASSERT_EQ(50, t);
-}
-
 
 #endif // PRIMES_HPP

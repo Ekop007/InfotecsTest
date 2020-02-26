@@ -25,17 +25,42 @@ void Program::fileOutput(Primes &p)
         }
         case 1:
         {
+            auto lmd1 = [&p] (uint32_t index)
+            {
+                uint32_t i = index - 1;
+                while (i > 0 && p[i] >= index)
+                {
+                    if (p[i] == index)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            };
             for(uint32_t i = 0; i < max; ++i)
             {
-                out << p[p[i]-1] << std::endl;
+                if (lmd1(i))
+                {
+                    out << p[i] << std::endl;
+                }
             }
             break;
         }
         case 2:
         {
+            auto lmd2 = [&p] (uint32_t index)
+            {
+                uint32_t num = 2 * p[index] + 1;
+                uint32_t j = index;
+                while (num > p[j])
+                {
+                    ++j;
+                }
+                return (p[j] == num);
+            };
             for(uint32_t i = 0; i < max; ++i)
             {
-                if (SophieGemanFilter(p, i))
+                if (lmd2(i))
                 {
                     out << p[i] << std::endl;
                 }
@@ -64,17 +89,42 @@ void Program::consoleOutput(Primes &p)
         }
         case 1:
         {
+            auto lmd1 = [&p] (uint32_t index)
+            {
+                uint32_t i = index - 1;
+                while (i > 0 && p[i] >= index)
+                {
+                    if (p[i] == index)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            };
             for(uint32_t i = 0; i < max; ++i)
             {
-                std::cout << p[p[i]-1] << " ";
+                if (lmd1(i))
+                {
+                    std::cout << p[i] << " ";
+                }
             }
             break;
         }
         case 2:
         {
+            auto lmd2 = [&p] (uint32_t index)
+            {
+                uint32_t num = 2 * p[index] + 1;
+                uint32_t j = index;
+                while (num > p[j])
+                {
+                    ++j;
+                }
+                return (p[j] == num);
+            };
             for(uint32_t i = 0; i < max; ++i)
             {
-                if (SophieGemanFilter(p, i))
+                if (lmd2(i))
                 {
                     std::cout << p[i] << " ";
                 }
@@ -83,17 +133,6 @@ void Program::consoleOutput(Primes &p)
         }
     }
     std::cout << "\n";
-}
-
-bool Program::SophieGemanFilter(Primes &p, uint32_t i)
-{
-    uint32_t num = 2 * p[i] + 1;
-    uint32_t j = i;
-    while (num > p[j])
-    {
-        ++j;
-    }
-    return (p[j] == num);
 }
 
 void Program::setSeachMode(uint32_t mode)

@@ -217,5 +217,3 @@ const Primes::Iterator& operator--(Primes::Iterator& it)
     it.value -= sizeof (it.value);
 	return it;
 }
-
-
