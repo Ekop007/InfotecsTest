@@ -25,7 +25,7 @@ void Program::fileOutput(Primes &p)
         }
         case 1:
         {
-            auto lmd1 = [&p] (uint32_t index)
+            auto lmd1 = [&p] (uint32_t index) -> bool
             {
                 uint32_t i = index - 1;
                 while (i > 0 && p[i] >= index)
@@ -48,7 +48,7 @@ void Program::fileOutput(Primes &p)
         }
         case 2:
         {
-            auto lmd2 = [&p] (uint32_t index)
+            auto lmd2 = [&p] (uint32_t index) -> bool
             {
                 uint32_t num = 2 * p[index] + 1;
                 uint32_t j = index;
@@ -89,7 +89,7 @@ void Program::consoleOutput(Primes &p)
         }
         case 1:
         {
-            auto lmd1 = [&p] (uint32_t index)
+            auto lmd1 = [&p] (uint32_t index) -> bool
             {
                 uint32_t i = index - 1;
                 while (i > 0 && p[i] >= index)
@@ -112,7 +112,7 @@ void Program::consoleOutput(Primes &p)
         }
         case 2:
         {
-            auto lmd2 = [&p] (uint32_t index)
+            auto lmd2 = [&p] (uint32_t index) -> bool
             {
                 uint32_t num = 2 * p[index] + 1;
                 uint32_t j = index;
